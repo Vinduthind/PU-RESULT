@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="techxpose.co.allresult.LogActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tool_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pulogo"
+
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/customcolorAccent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/titleText"
+            android:textColor="#ffffff"
+            android:text="   PU Result"/>
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Date Sheet"
+        android:layout_below="@+id/my_toolbar"
+        android:gravity="center"
+        android:id="@+id/dateSheet"
+
+        android:textColor="@color/colorAccent"
+        android:background="@color/customcolorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_below="@+id/dateSheet"
+    android:text="Recently Announced Result"
+    android:gravity="center"
+    android:id="@+id/today"
+    android:textColor="@color/colorAccent"
+    android:background="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="All Semester Results"
+        android:gravity="center"
+        android:id="@+id/allResult"
+
+        android:layout_below="@+id/today"
+        android:textColor="@color/colorAccent"
+        android:background="@color/customcolorAccent"/>
+
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Notifications"
+        android:gravity="center"
+        android:id="@+id/notifications"
+        android:layout_below="@+id/allResult"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Contact us"
+        android:gravity="center"
+        android:id="@+id/contactUs"
+        android:layout_below="@+id/notifications"
+        android:textColor="@color/colorAccent"
+        android:background="@color/customcolorAccent"
+        />
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/contactUs"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+    </com.google.android.gms.ads.AdView>
+</RelativeLayout>

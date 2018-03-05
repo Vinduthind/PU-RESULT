@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#20733F55"
+
+
+    tools:context="techxpose.co.allresult.ContactusActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/navigation_back"
+            android:src="@drawable/ic_action_back"
+            android:layout_height="wrap_content" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tool_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/pulogo"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/customcolorAccent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:textColor="#ffffff"
+            android:text="   CONTACT US"/>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:inputType="textCapSentences"
+        android:text="YOUR NAME"
+        android:textStyle="bold"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Name"
+        android:inputType="textCapSentences"
+        android:padding="5dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/boundary"
+        android:maxLines="1"
+        android:id="@+id/name"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorAccent"
+        android:layout_height="wrap_content"
+
+        android:padding="5dp"
+        android:text="YOUR EMAIL"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:hint="Email"
+
+        android:background="@drawable/boundary"
+        android:maxLines="1"
+        android:id="@+id/email"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:textColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBJECT"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject"
+        android:inputType="textCapSentences"
+        android:padding="5dp"
+        android:maxLines="1"
+        android:background="@drawable/boundary"
+        android:id="@+id/subject"/>
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:textColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MESSAGE"
+        android:textStyle="bold"/>
+    <EditText
+
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content"
+
+        android:lines="5"
+        android:background="@drawable/boundary"
+        android:id="@+id/message"
+        android:hint="Query (20-50 words)"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="10dp"
+        android:id="@+id/submit"
+        android:background="@drawable/boundary"/>
+
+</LinearLayout>

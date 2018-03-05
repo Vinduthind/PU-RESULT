@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#20733F55"
+    tools:context="techxpose.co.allresult.MainActivity">
+   <android.support.v7.widget.Toolbar
+       android:id="@+id/my_toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:background="@color/colorPrimary"
+       android:elevation="4dp"
+
+       android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+       app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+      <ImageView
+          android:layout_width="wrap_content"
+          android:id="@+id/navigation_back"
+          android:layout_centerVertical="true"
+          android:src="@drawable/ic_action_back"
+          android:layout_height="wrap_content" />
+      <de.hdodenhof.circleimageview.CircleImageView
+          xmlns:app="http://schemas.androi.d.com/apk/res-auto"
+          android:id="@+id/tool_logo"
+          android:layout_toRightOf="@+id/navigation_back"
+          android:layout_centerVertical="true"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:src="@drawable/pulogo"
+          app:civ_border_width="2dp"
+
+          app:civ_border_color="@color/customcolorAccent"/>
+      <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textSize="20dp"
+          android:layout_toRightOf="@+id/tool_logo"
+          android:id="@+id/titletext"
+          android:layout_centerVertical="true"
+          android:textColor="#ffffff"
+          android:textAlignment="center"
+
+         android:text="   PU Result"/>
+
+
+
+     </RelativeLayout>
+   </android.support.v7.widget.Toolbar>
+   <EditText
+       android:layout_width="match_parent"
+       android:id="@+id/searchField"
+       android:layout_below="@+id/my_toolbar"
+       android:inputType="textCapSentences"
+       android:layout_marginTop="5dp"
+       android:background="@drawable/boundary_circle_side"
+       android:drawableLeft="@drawable/ic_action_search"
+       android:hint="eg. Master of arts, M.Sc, B.Sc "
+       android:focusableInTouchMode="true"
+       android:padding="5.5dp"
+       android:maxLines="1"
+       android:textSize="16dp"
+       android:cursorVisible="false"
+       android:layout_height="wrap_content" />
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:padding="10dp"
+       android:layout_centerVertical="true"
+       android:layout_below="@+id/searchField"
+       android:layout_height="match_parent"
+       android:id="@+id/blog">
+
+   </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

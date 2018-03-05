@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:background="@color/transparent"
+
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text0"
+        android:padding="10dp"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="Semester Results:"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dec2017"
+            android:layout_below="@+id/text0"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="December 2017"/>
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/may2017"
+        android:layout_below="@+id/dec2017"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+    android:text="May 2017"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/may2017"
+        android:id="@+id/dec2016"
+        android:text="December 2016"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dec2016"
+        android:id="@+id/may2016"
+        android:textColor="#ffffff"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="May 2016"/>
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_below="@+id/may2016"
+        android:id="@+id/dec2015"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+    android:text="December 2015"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dec2015"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/may2015"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:text="May 2015"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/may2015"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/dec2014"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:textSize="20dp"
+        android:text="December 2014"/>
+
+
+</RelativeLayout>
