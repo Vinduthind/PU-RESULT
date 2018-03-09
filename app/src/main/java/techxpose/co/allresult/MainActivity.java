@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final BlogViewHolder viewHolder, final Blog model, int position) {
 
+
                 viewHolder.setBranchname(model.getBranchname());
                 viewHolder.setResultlink(model.getResultlink());
                 viewHolder.setdate(model.getResultDate());
