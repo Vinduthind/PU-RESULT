@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
-        final TextView dec2017 =mview.findViewById(R.id.dec2017);
+       TextView dec2017 =mview.findViewById(R.id.dec2017);
         TextView may2017 =mview.findViewById(R.id.may2017);
         TextView dec2016 =mview.findViewById(R.id.dec2016);
         TextView may2016 =mview.findViewById(R.id.may2016);

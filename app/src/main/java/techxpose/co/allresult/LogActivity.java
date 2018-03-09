@@ -75,7 +75,7 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
         allResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(LogActivity.this,MainActivity.class);
+                Intent intent =new Intent(LogActivity.this,AllResultActivity.class);
                 intent.putExtra("uid","Result");
                 startActivity(intent);
 

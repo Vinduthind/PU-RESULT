@@ -27,7 +27,8 @@
         <activity
             android:name=".ContactusActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AllResultActivity"></activity>
+        <activity android:name=".AllResultActivity"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
     </application>
 
 </manifest>
