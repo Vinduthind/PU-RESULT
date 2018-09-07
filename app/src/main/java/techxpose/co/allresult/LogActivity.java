@@ -2,7 +2,9 @@ package techxpose.co.allresult;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,8 +43,8 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
         //for adv purpose
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
-
+        //MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -56,6 +58,7 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
         progress = new ProgressDialog(this);
         mdatabase= FirebaseDatabase.getInstance().getReference();
         mdialog.setMessage("Loading Result...");
+        mdialog.setCancelable(false);
         mdialog.show();
         mdatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,6 +72,8 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+
 
             }
         });
@@ -180,9 +185,50 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
             startActivity(new Intent(LogActivity.this,ContactusActivity.class));
             return true;
         }
+        if (id == R.id.action_rateus) {
+          //  startActivity(new Intent(LogActivity.this,ContactusActivity.class));
+            rateapp();
+            return true;
+        }
 
+        if (id == R.id.action_share) {
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, "PU Results");
+                String sAux = "\nHey, I am using this app to see my Result.\n\n";
+                sAux = sAux + "https://play.google.com/store/apps/details?id=techxpose.co.allresult \n\n";
+                i.putExtra(Intent.EXTRA_TEXT, sAux);
+                startActivity(Intent.createChooser(i, "choose one"));
+            } catch(Exception e) {
+                //e.toString();
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+            }
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onRestart() {
 
+        super.onRestart();
+    }
+    private void rateapp()
+    {
+
+        Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=techxpose.co.allresult");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=techxpose.co.allresult")));
+        }
+    }
 }

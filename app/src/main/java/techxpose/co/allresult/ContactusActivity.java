@@ -9,11 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ContactusActivity extends AppCompatActivity {
 ImageView navigationicon;
+    AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +29,14 @@ ImageView navigationicon;
         final EditText your_subject     = (EditText) findViewById(R.id.subject);
         final EditText your_message     = (EditText) findViewById(R.id.message);
         Button submit = (Button) findViewById(R.id.submit);
+
+      //ads setup--------------------------------------------------
+        //MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+//--------------------------------------------------
 
         navigationicon=findViewById(R.id.navigation_back);
         navigationicon.setOnClickListener(new View.OnClickListener() {

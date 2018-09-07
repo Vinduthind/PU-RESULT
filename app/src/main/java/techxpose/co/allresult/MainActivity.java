@@ -1,10 +1,12 @@
 package techxpose.co.allresult;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -33,24 +35,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
         private RecyclerView mbloglist;
         private DatabaseReference mdatabase;
         EditText searchbar;
+
         private  Query mQuery;
         ImageView navigationicon;
         TextView titleText;
+    String value;
+
         android.support.v7.widget.Toolbar mytoolbar;
         private InterstitialAd interstitialAd;
-
+        ProgressDialog mdialog;
     private String uidw=null, examination=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +68,15 @@ public class MainActivity extends AppCompatActivity {
         mbloglist = findViewById(R.id.blog);
         mytoolbar=findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
-
+        mdialog = new ProgressDialog(this);
         // for advertise pupose
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
+
+        //MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
         interstitialAd= new InterstitialAd(this);
-        interstitialAd.setAdUnitId("ca-app-pub-7426325861660851/8005636620");
-        interstitialAd.loadAd(new AdRequest.Builder().build());
+
+      interstitialAd.setAdUnitId("ca-app-pub-7426325861660851/8005636620");
+      interstitialAd.loadAd(new AdRequest.Builder().build());
 
         searchbar = findViewById(R.id.searchField);
         titleText= findViewById(R.id.titletext);
@@ -113,10 +125,37 @@ public class MainActivity extends AppCompatActivity {
                }
                else{
                   // mQuery= mdatabase.orderByKey().startAt("#"+searchContent).endAt("#"+searchContent)
+                   //here search work
+                   mdialog.setMessage("wait...");
+                   mdialog.show();
+                   mdatabase.addValueEventListener(new ValueEventListener() {
+                       @Override
+                       public void onDataChange(DataSnapshot dataSnapshot) {
+                           for(DataSnapshot data: dataSnapshot.getChildren()){
+                               String usernames=data.getKey();
 
-                       mQuery = mdatabase.orderByChild("branchname").startAt(searchContent).endAt(searchContent + "\uf8ff");
-                       recyclepostwork();
+                               value=dataSnapshot.child(usernames).child("examination").getValue(String.class);
+                             //  Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
+                               System.out.println("value = "+value);
+                               System.out.println("Examination = "+examination);
+                               mdialog.dismiss();
+                           }
 
+                       }
+
+                       @Override
+                       public void onCancelled(DatabaseError databaseError) {
+
+                       }
+                   });
+
+
+
+
+
+                            mQuery = mdatabase.orderByChild("branchname").startAt(searchContent).endAt(searchContent + "\uf8ff");
+                            recyclepostwork();
+                            mdialog.dismiss();
 
             }}
 
@@ -160,18 +199,22 @@ public class MainActivity extends AppCompatActivity {
             protected void populateViewHolder(final BlogViewHolder viewHolder, final Blog model, int position) {
 
 
+
                 viewHolder.setBranchname(model.getBranchname());
                 viewHolder.setResultlink(model.getResultlink());
                 viewHolder.setdate(model.getResultDate());
                 viewHolder.setExamination(model.getExamination());
-               // viewHolder.setYear(model.getYear());
-                //Toast.makeText(MainActivity.this, model.getBranchname(), Toast.LENGTH_SHORT).show();
+
+                // viewHolder.setYear(model.getYear());
+                //Toast.makeText(MainActivity.this, model.getResultlink(), Toast.LENGTH_LONG).show();
                 viewHolder.mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                         try {
-                            Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getResultlink()));
+                            Intent myIntent = new Intent(MainActivity.this,ShowResult.class);
+                            myIntent.putExtra("result_link",model.getResultlink().toString());
+                                       // Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getResultlink()));
                             startActivity(myIntent);
                         } catch (ActivityNotFoundException e) {
                             Toast.makeText(MainActivity.this, "No result Found", Toast.LENGTH_SHORT).show();
@@ -180,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
             }
+
         };
 
         final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
@@ -218,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
         {
             TextView setexamination = mview.findViewById(R.id.examination);
             setexamination.setText("Examination : "+examination);
+
         }
         public void setdate(String resultDate)
         {
@@ -324,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
         dec2017.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mQuery = mdatabase.orderByChild("examination").equalTo("December 2017");
+                mQuery = mdatabase.orderByChild("examination").equalTo("December,2017");
                 //Toast.makeText(this, date+"  "+uidw, Toast.LENGTH_SHORT).show();
                 recyclepostwork();
                 titleText.setText("   December 2017 Results");
@@ -392,6 +436,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 
 

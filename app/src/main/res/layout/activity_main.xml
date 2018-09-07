@@ -57,6 +57,7 @@
        android:id="@+id/searchField"
        android:layout_below="@+id/my_toolbar"
        android:inputType="textCapSentences"
+        android:visibility="gone"
        android:layout_marginTop="5dp"
        android:background="@drawable/boundary_circle_side"
        android:drawableLeft="@drawable/ic_action_search"

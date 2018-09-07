@@ -17,8 +17,8 @@ AdView mAdView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_result);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
-
+       // MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
