@@ -14,7 +14,7 @@
         android:layout_below="@+id/may2015"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/1864622300"/>
+        ads:adUnitId="ca-app-pub-7426325861660851/186462230"/>
 
     <WebView
         android:id="@+id/webView1"
@@ -23,7 +23,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/adView2"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:layout_alignParentRight="true" />
 
     <ProgressBar
         android:layout_width="wrap_content"
@@ -36,7 +37,6 @@
         android:id="@+id/showResult"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="12dp"
@@ -47,7 +47,35 @@
         android:paddingRight="4dp"
         android:paddingTop="4dp"
         android:text="Show Result"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/exam_name"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginRight="12dp"
+        android:inputType="number
+"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true" />
+
+    <Spinner
+        android:id="@+id/semester"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exam_name"/>
+
+    <Spinner
+        android:id="@+id/examType"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/semester"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -59,7 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/may2015"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

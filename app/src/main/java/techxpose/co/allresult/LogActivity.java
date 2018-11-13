@@ -9,16 +9,18 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import techxpose.co.allresult.Adapter.LogAdapter;
+import techxpose.co.allresult.Model.LogModel;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.database.DataSnapshot;
@@ -27,14 +29,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LogActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class LogActivity extends AppCompatActivity implements LogAdapter.OnItemClickListner
+{
 TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
-    private DatabaseReference mdatabase;
+     DatabaseReference mdatabase;
     String value,   noticationString="No Notification Yet",noticationdate;
-    AlertDialog mdialog;
-    ProgressDialog progress;
-    Toolbar mytoolbar;
-    AdView mAdView;
+     AlertDialog mdialog;
+     ProgressDialog progress;
+     Toolbar mytoolbar;
+     AdView mAdView;
+     ArrayList<LogModel> logModelArrayList;
+     RecyclerView recyclerView;
+     LogAdapter logAdapter;
+     List<LogModel> logList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +58,8 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
+        recyclerView = findViewById(R.id.rv1);
+        logList= new ArrayList<>();
         recentlyupdated = (TextView)findViewById(R.id.today);
         allResult=(TextView)findViewById(R.id.allResult);
         notification=(TextView)findViewById(R.id.notifications);
@@ -69,7 +80,6 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
               recentlyupdated.setText(value+" Results");
               mdialog.dismiss();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -77,6 +87,32 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
 
             }
         });
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        logModelArrayList = new ArrayList<>();
+        String heads[] = {"Jobs", "My Profile", "Notification", "Applied Jobs", "Date Sheets", "Contact US", "Rate US","Invite Friends"};
+
+        String subs[] = {"12 new jobs found", "75% complete", "2 new messages", "3 applies jobs", "Edit resume", "Set preferences","",""};
+
+        int images[] = {R.drawable.find_jobs, R.drawable.profile, R.drawable.messages, R.drawable.applied_jobs,
+                R.drawable.resume,R.drawable.settings, R.drawable.find_jobs, R.drawable.profile};
+
+        for(int count = 0 ; count < heads.length ; count++)
+        {
+            LogModel logModel = new LogModel();
+            logModel.setHead(heads[count]);
+            logModel.setSub(subs[count]);
+            logModel.setImage(images[count]);
+            logModelArrayList.add(logModel);
+            //this should be retrieved in our adapter
+        }
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        logAdapter = new LogAdapter(logModelArrayList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(logAdapter);
+        logAdapter.setOnItemClickListener(this);
+        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         allResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,9 +138,6 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
             @Override
             public void onClick(View v) {
                // Toast.makeText(LogActivity.this, "No Notifiaction Yet", Toast.LENGTH_LONG).show();
-
-
-
                 Snackbar snackbar =  Snackbar.make(v, "Last Update on "+noticationdate+"\n\nMESSAGE:\n"+noticationString, Snackbar.LENGTH_INDEFINITE)
                         .setAction("CLOSE", new View.OnClickListener() {
                             @Override
@@ -230,5 +263,17 @@ TextView recentlyupdated ,allResult,notification,contactus,dateSheet;
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=techxpose.co.allresult")));
         }
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
+        LogModel clickItem =logModelArrayList.get(position);
+        Toast.makeText(this, clickItem.getHead()+" : "+clickItem.getSub(), Toast.LENGTH_LONG).show();
+        System.out.println(clickItem.getHead());
+//        Intent intent=new Intent(this,MainActivity.class);
+//
+//        this.startActivity(intent);
+//        finish();
     }
 }

@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">PU Result </string>
+    <string-array name="sem_array">
+        <item>Select Semester</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string-array name="examType_array">
+        <item>Full Subjects</item>
+        <item>Re-appear Candidate/s</item>
+        <item>Deficient Candidate/s</item>
+        <item>Additional Subject/s</item>
+        <item>Improvement of Performance</item>
+    </string-array>
 </resources>

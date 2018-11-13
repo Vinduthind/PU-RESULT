@@ -140,7 +140,7 @@
         android:layout_alignParentBottom="true"
 
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
     </com.google.android.gms.ads.AdView>
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -153,7 +153,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/adView"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
     </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

@@ -48,19 +48,18 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-        private RecyclerView mbloglist;
-        private DatabaseReference mdatabase;
-        EditText searchbar;
-
-        private  Query mQuery;
-        ImageView navigationicon;
-        TextView titleText;
+    private RecyclerView mbloglist;
+    private DatabaseReference mdatabase;
+    EditText searchbar;
+    private  Query mQuery;
+    ImageView navigationicon;
+    TextView titleText;
     String value;
-
-        android.support.v7.widget.Toolbar mytoolbar;
-        private InterstitialAd interstitialAd;
-        ProgressDialog mdialog;
+    android.support.v7.widget.Toolbar mytoolbar;
+    private InterstitialAd interstitialAd;
+    ProgressDialog mdialog;
     private String uidw=null, examination=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,15 +68,13 @@ public class MainActivity extends AppCompatActivity {
         mytoolbar=findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         mdialog = new ProgressDialog(this);
-        // for advertise pupose
 
+        // for advertise pupose
         //MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
         interstitialAd= new InterstitialAd(this);
-
-      interstitialAd.setAdUnitId("ca-app-pub-7426325861660851/8005636620");
-      interstitialAd.loadAd(new AdRequest.Builder().build());
-
+        interstitialAd.setAdUnitId("ca-app-pub-7426325861660851/8005636620");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
         searchbar = findViewById(R.id.searchField);
         titleText= findViewById(R.id.titletext);
         navigationicon=findViewById(R.id.navigation_back);
@@ -108,9 +105,7 @@ public class MainActivity extends AppCompatActivity {
         searchbar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchContent = searchbar.getText().toString();
@@ -133,26 +128,17 @@ public class MainActivity extends AppCompatActivity {
                        public void onDataChange(DataSnapshot dataSnapshot) {
                            for(DataSnapshot data: dataSnapshot.getChildren()){
                                String usernames=data.getKey();
-
                                value=dataSnapshot.child(usernames).child("examination").getValue(String.class);
                              //  Toast.makeText(MainActivity.this, value, Toast.LENGTH_SHORT).show();
                                System.out.println("value = "+value);
                                System.out.println("Examination = "+examination);
                                mdialog.dismiss();
                            }
-
                        }
-
                        @Override
                        public void onCancelled(DatabaseError databaseError) {
-
                        }
                    });
-
-
-
-
-
                             mQuery = mdatabase.orderByChild("branchname").startAt(searchContent).endAt(searchContent + "\uf8ff");
                             recyclepostwork();
                             mdialog.dismiss();
@@ -195,57 +181,50 @@ public class MainActivity extends AppCompatActivity {
                 mQuery
 
         ) {
-            @Override
-            protected void populateViewHolder(final BlogViewHolder viewHolder, final Blog model, int position) {
+        @Override
+        protected void populateViewHolder(final BlogViewHolder viewHolder, final Blog model, int position) {
 
+            viewHolder.setBranchname(model.getBranchname());
+            viewHolder.setResultlink(model.getResultlink());
+            viewHolder.setdate(model.getResultDate());
+            viewHolder.setExamination(model.getExamination());
 
+            // viewHolder.setYear(model.getYear());
+            //Toast.makeText(MainActivity.this, model.getResultlink(), Toast.LENGTH_LONG).show();
+            viewHolder.mview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                viewHolder.setBranchname(model.getBranchname());
-                viewHolder.setResultlink(model.getResultlink());
-                viewHolder.setdate(model.getResultDate());
-                viewHolder.setExamination(model.getExamination());
+                    try {
+                        Intent myIntent = new Intent(MainActivity.this,ShowResult.class);
+                        myIntent.putExtra("result_link",model.getResultlink().toString());
+                                   // Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getResultlink()));
+                        startActivity(myIntent);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(MainActivity.this, "No result Found", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }}
+            });
+        }};
+    final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+    mLinearLayoutManager.canScrollVertically();
+    mLinearLayoutManager.setReverseLayout(true);
+    mLinearLayoutManager.setStackFromEnd(true);
 
-                // viewHolder.setYear(model.getYear());
-                //Toast.makeText(MainActivity.this, model.getResultlink(), Toast.LENGTH_LONG).show();
-                viewHolder.mview.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+    mbloglist.setLayoutManager(mLinearLayoutManager);
+    firebaseRecycleAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            super.onItemRangeInserted(positionStart, itemCount);
+            // int friendlyMessageCount = firebaseRecyclerAdapter.getItemCount();
+            // If the recycler view is initially being loaded or the
+            // user is at the bottom of the list, scroll to the bottom
+            // of the list to show the newly added message.\
 
-                        try {
-                            Intent myIntent = new Intent(MainActivity.this,ShowResult.class);
-                            myIntent.putExtra("result_link",model.getResultlink().toString());
-                                       // Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getResultlink()));
-                            startActivity(myIntent);
-                        } catch (ActivityNotFoundException e) {
-                            Toast.makeText(MainActivity.this, "No result Found", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-            }
-
-        };
-
-        final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.canScrollVertically();
-        mLinearLayoutManager.setReverseLayout(true);
-        mLinearLayoutManager.setStackFromEnd(true);
-
-        mbloglist.setLayoutManager(mLinearLayoutManager);
-        firebaseRecycleAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onItemRangeInserted(int positionStart, int itemCount) {
-                super.onItemRangeInserted(positionStart, itemCount);
-                // int friendlyMessageCount = firebaseRecyclerAdapter.getItemCount();
-                // If the recycler view is initially being loaded or the
-                // user is at the bottom of the list, scroll to the bottom
-                // of the list to show the newly added message.\
-
-                mLinearLayoutManager.scrollToPosition(positionStart);
-            }
-        });
-        mbloglist.setAdapter(firebaseRecycleAdapter);
+            mLinearLayoutManager.scrollToPosition(positionStart);
+        }
+    });
+    mbloglist.setAdapter(firebaseRecycleAdapter);
 
     }
 
@@ -294,10 +273,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -343,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "restart", Toast.LENGTH_SHORT).show();
         if (interstitialAd.isLoaded())
         {
-            interstitialAd.show();
+            //interstitialAd.show();
         }
 
         super.onRestart();
@@ -354,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder mbuilder = new AlertDialog.Builder(this);
         View mview = getLayoutInflater().inflate(R.layout.annoucedresultlist,null);
         mbuilder.setView(mview);
-        final AlertDialog dialog =mbuilder.create();
+        final AlertDialog dialog = mbuilder.create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
