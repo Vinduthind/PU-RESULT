@@ -26,7 +26,7 @@
             android:id="@+id/tool_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/pulogo"
+            android:src="@mipmap/ic_launcher"
 
             app:civ_border_width="2dp"
             app:civ_border_color="@color/customcolorAccent"/>
@@ -38,95 +38,25 @@
             android:textColor="#ffffff"
             android:text="   All Result"/>
     </android.support.v7.widget.Toolbar>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="December 2017"
-        android:layout_below="@+id/my_toolbar"
-        android:gravity="center"
-        android:id="@+id/dec2017"
-        android:visibility="gone"
-        android:textColor="@color/colorAccent"
-        android:background="@color/customcolorAccent"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@+id/dec2017"
-        android:text="May 2017"
-        android:gravity="center"
-        android:id="@+id/may2017"
-        android:visibility="gone"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="December 2016"
-        android:gravity="center"
-        android:id="@+id/dec2016"
-        android:visibility="gone"
-        android:layout_below="@+id/may2017"
-        android:textColor="@color/colorAccent"
-        android:background="@color/customcolorAccent"/>
-
-
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="May 2016"
-        android:gravity="center"
-        android:id="@+id/may2016"
-        android:layout_below="@+id/dec2016"
-        android:visibility="gone"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="December 2015"
-        android:gravity="center"
-        android:id="@+id/dec2015"
-        android:layout_below="@+id/may2016"
-        android:visibility="gone"
-        android:textColor="@color/colorAccent"
-        android:background="@color/customcolorAccent"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text="May 2015"
-        android:gravity="center"
-        android:id="@+id/may2015"
-        android:layout_below="@+id/dec2015"
-        android:textColor="@color/colorAccent"
-        android:visibility="gone"
-        android:background="@color/colorPrimaryDark"
-        />
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/may2015"
-        ads:adSize="BANNER"
-        android:visibility="gone"
-        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
-    </com.google.android.gms.ads.AdView>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_below="@+id/my_toolbar"
         android:layout_height="wrap_content"
-        android:id="@+id/rv2">
+        android:id="@+id/rv2"
+        android:layout_above="@+id/adView">
+
+
 
     </android.support.v7.widget.RecyclerView>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+    </com.google.android.gms.ads.AdView>
 </RelativeLayout>

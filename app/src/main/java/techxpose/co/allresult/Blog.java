@@ -1,5 +1,7 @@
 package techxpose.co.allresult;
 
+import java.util.ArrayList;
+
 /**
  * Created by laddi on 23-February-2018.
  */
@@ -10,6 +12,12 @@ public   Blog(){}
 
 
     private String branchname;
+    private String resultlink;
+    private String year;
+    private String date;
+    private String resultdate;
+    private String examination;
+    ArrayList<String> list = new ArrayList<>();
 
     public Blog(String branchname, String resultlink, String year, String date, String resultDate, String examination) {
         this.branchname = branchname;
@@ -19,10 +27,6 @@ public   Blog(){}
         this.resultdate = resultDate;
         this.examination = examination;
     }
-
-    private String resultlink;
-    private String year;
-    private String date;
 
     public String getResultDate() {
         return resultdate;
@@ -40,8 +44,6 @@ public   Blog(){}
         this.examination = examination;
     }
 
-    private String resultdate;
-    private String examination;
     public String getDate() {
         return date;
     }
@@ -50,13 +52,9 @@ public   Blog(){}
         this.date = date;
     }
 
-
-
-
-
-
-
     public String getBranchname() {
+        list.add(branchname+".");
+        System.out.println(list);
         return branchname+".";
     }
 

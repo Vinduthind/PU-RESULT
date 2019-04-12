@@ -29,7 +29,7 @@
             android:id="@+id/tool_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/pulogo"
+            android:src="@mipmap/ic_launcher"
             app:civ_border_width="2dp"
             app:civ_border_color="@color/customcolorAccent"/>
         <TextView
@@ -130,30 +130,16 @@
         android:layout_margin="10dp"
         android:id="@+id/submit"
         android:background="@drawable/boundary"/>
+
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
-
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
-    </com.google.android.gms.ads.AdView>
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView2"
-
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/adView"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-7426325861660851/186462230">
+        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
     </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

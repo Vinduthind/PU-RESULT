@@ -8,35 +8,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 public class ContactusActivity extends AppCompatActivity {
-ImageView navigationicon;
+    ImageView navigationicon;
     AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactus);
         setTitle("Contact US");
-        final EditText your_name        = (EditText) findViewById(R.id.name);
-        final EditText your_email       = (EditText) findViewById(R.id.email);
-        final EditText your_subject     = (EditText) findViewById(R.id.subject);
-        final EditText your_message     = (EditText) findViewById(R.id.message);
-        Button submit = (Button) findViewById(R.id.submit);
+        final EditText your_name = findViewById(R.id.name);
+        final EditText your_email = findViewById(R.id.email);
+        final EditText your_subject = findViewById(R.id.subject);
+        final EditText your_message = findViewById(R.id.message);
+        Button submit = findViewById(R.id.submit);
 
       //ads setup--------------------------------------------------
-        //MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~648639359");
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7426325861660851~6486393593");
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-//--------------------------------------------------
+        //--------------------------------------------------
 
         navigationicon=findViewById(R.id.navigation_back);
         navigationicon.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +46,10 @@ ImageView navigationicon;
             @Override
             public void onClick(View v) {
 
-                String name      = your_name.getText().toString();
-                String email     = your_email.getText().toString();
-                String subject   = your_subject.getText().toString();
-                String message   = your_message.getText().toString();
+                String name = your_name.getText().toString();
+                String email = your_email.getText().toString();
+                String subject = your_subject.getText().toString();
+                String message = your_message.getText().toString();
                 if (TextUtils.isEmpty(name)){
                     your_name.setError("Enter Your Name");
                     your_name.requestFocus();

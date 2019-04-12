@@ -16,11 +16,49 @@
         android:layout_centerHorizontal="true"
         android:text="Semester Results:"/>
 
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dec2018"
+        android:layout_below="@+id/text0"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="December 2018"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nov2018"
+        android:layout_below="@+id/dec2018"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="November 2018"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/may2018"
+        android:layout_below="@+id/nov2018"
+        android:padding="10dp"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="May 2018"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dec2017"
-            android:layout_below="@+id/text0"
+        android:layout_below="@+id/may2018"
         android:padding="10dp"
         android:textSize="20dp"
         android:textColor="#ffffff"
@@ -89,5 +127,14 @@
         android:textSize="20dp"
         android:text="December 2014"/>
 
-
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7426325861660851/1864622300">
+    </com.google.android.gms.ads.AdView>
 </RelativeLayout>
