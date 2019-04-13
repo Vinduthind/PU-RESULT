@@ -16,9 +16,11 @@ import java.util.ArrayList;
 
 import techxpose.co.allresult.AllResultActivity;
 import techxpose.co.allresult.ContactusActivity;
+import techxpose.co.allresult.DateSheetActivity;
 import techxpose.co.allresult.LogActivity;
 import techxpose.co.allresult.MainActivity;
 import techxpose.co.allresult.Model.LogModel;
+import techxpose.co.allresult.PdfReader;
 import techxpose.co.allresult.R;
 
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
@@ -122,7 +124,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
                             }
                             case 3 :
                             {
-                                intent = new Intent(context,MainActivity.class);
+                                intent = new Intent(context,DateSheetActivity.class);
                                 intent.putExtra("uid","DateSheet");
                                 context.startActivity(intent);
                                 break;

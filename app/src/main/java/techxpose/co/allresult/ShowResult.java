@@ -2,6 +2,7 @@ package techxpose.co.allresult;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -32,15 +33,18 @@ import com.google.android.gms.ads.MobileAds;
 public class ShowResult extends AppCompatActivity {
 
     private WebView webView;
-    Button mShowResult;
-    ProgressDialog mdialog;
-    EditText rollNo;
+    private Button mShowResult,seeFullResult;
+    private ProgressDialog mdialog;
+    private EditText rollNo;
     private InterstitialAd interstitialAd;
     private AdView mAdView;
-    Spinner semesterSpinner,examTypeSpinner;
-    String[] SemArr, examTypeArr;
-    TextView regNo,sMark,sName,examSem,exam_name;
-    String res_link;
+    private Spinner semesterSpinner,examTypeSpinner;
+    private String[] SemArr, examTypeArr;
+    private TextView regNo,sMark,sName,examSem,exam_name;
+    private String res_link;
+    private String errorMessage;
+    private int count=1;
+    private int countToCheckValidRollNumber=1;
     @SuppressLint({"JavascriptInterface", "AddJavascriptInterface"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class ShowResult extends AppCompatActivity {
         mdialog.setCancelable(false);
         mdialog.show();
         mShowResult= findViewById(R.id.showResult);
+        seeFullResult = findViewById(R.id.seefullResult);
         rollNo = findViewById(R.id.rollNo);
         exam_name = findViewById(R.id.exam_name);
         exam_name.setText(examType);
@@ -188,6 +193,7 @@ public class ShowResult extends AppCompatActivity {
                     mdialog.setMessage("Result : "+rollNo.getText().toString()+" Loading...");
                     mdialog.setCancelable(true);
                     mdialog.show();
+                    count=1;
                 }
                 else{
                     Toast.makeText(ShowResult.this, "Password Should be greater than 6 units", Toast.LENGTH_SHORT).show();
@@ -195,6 +201,17 @@ public class ShowResult extends AppCompatActivity {
 
             }
         });
+
+        seeFullResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.loadUrl("javascript:(function() { " +
+                        "document.getElementById('ctl00_cph1_lbtnMarksDetail').click()"+
+                        "})()");
+                mdialog.show();
+            }
+        });
+
 
     }
 
@@ -212,9 +229,34 @@ public class ShowResult extends AppCompatActivity {
                     "document.getElementsByTagName('h2')[0].style.display='none'; " +
                     "document.getElementsByTagName('table')[0].setAttribute(\"style\",\"width:155%; cellspacing:40px; margin-left: -120px;font-size:35px; height:500px;\"); " +
                     "})()");
-            view.loadUrl("javascript:window.INTERFACE.processContent(document.getElementById('ctl00_cph1_lblRegNo').innerHTML,document.getElementById('ctl00_cph1_lblMarks').innerHTML,document.getElementById('ctl00_cph1_lblCName').innerHTML);");
-
+            view.loadUrl("javascript:window.INTERFACE.processContent(document.getElementById('ctl00_cph1_lblRegNo').innerHTML,document.getElementById('ctl00_cph1_lblMarks').innerHTML,document.getElementById('ctl00_cph1_lblCName').innerHTML,document.getElementById('ctl00_cph1_lblMsg').innerHTML);");
             mdialog.dismiss();
+            if(countToCheckValidRollNumber>2) {
+                sName.setText("Please check Ceredentials");
+            }
+            if(count<2)
+            {
+                webView.loadUrl("javascript:(function() { " +
+                        "document.getElementById('ctl00_cph1_btnShowResult').click()"+
+                        "})()");
+                mdialog.setMessage("Result : "+rollNo.getText().toString()+" Loading...");
+                mdialog.setCancelable(true);
+                mdialog.show();
+                count++;
+                countToCheckValidRollNumber++;
+
+            }
+            if(!regNo.getText().toString().equals("00000000")){
+
+                mShowResult.setVisibility(View.GONE);
+                seeFullResult.setVisibility(View.VISIBLE);
+            }
+            if(url.contains("frmShowResultDetail.aspx?CN")){
+                finish();
+                Intent intent = new Intent(ShowResult.this,PdfReader.class);
+                intent.putExtra("resLink",url);
+                startActivity(intent);
+            }
             //Toast.makeText(ShowResult.this, "Result loaded", Toast.LENGTH_SHORT).show();
 
         }
@@ -263,11 +305,12 @@ public class ShowResult extends AppCompatActivity {
 
 
         @JavascriptInterface
-        public void processContent(String content,String name, String mark)
+        public void processContent(String content,String name, String mark,String errorMessage)
         {
             final String stContent = content;
             final String sutMark = mark;
             final String stuName = name;
+
             regNo.post(new Runnable()
             {
                 public void run()
@@ -276,11 +319,13 @@ public class ShowResult extends AppCompatActivity {
                     //Toast.makeText(ShowResult.this, content, Toast.LENGTH_SHORT).show();
                 }
             });
-            stName.post(new Runnable()
+           stName.post(new Runnable()
             {
                 public void run()
                 {
-                    stName.setText(stuName);
+
+                        stName.setText(stuName);
+
                     //Toast.makeText(ShowResult.this, content, Toast.LENGTH_SHORT).show();
                 }
             });

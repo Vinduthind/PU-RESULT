@@ -1,5 +1,4 @@
 package techxpose.co.allresult;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;

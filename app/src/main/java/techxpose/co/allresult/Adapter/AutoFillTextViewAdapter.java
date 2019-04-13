@@ -143,11 +143,10 @@ public class AutoFillTextViewAdapter extends ArrayAdapter<AutoFillTextViewModel>
             {
                 try {
                     tempValues.clear();
-                    Toast.makeText(context, "Size of list is now "+tempValues.size(), Toast.LENGTH_SHORT).show();
                     tempValues = (ArrayList<AutoFillTextViewModel>) filterResults.values;
                 }
                 catch (ConcurrentModificationException e1){
-                    Toast.makeText(context, "Exception Again Occur ", Toast.LENGTH_SHORT).show();
+                    e1.fillInStackTrace();
                 }
             }catch (NullPointerException e){
 

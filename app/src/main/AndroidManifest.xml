@@ -30,8 +30,13 @@
         <activity
             android:name=".AllResultActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShowResult"
-        android:theme="@style/AppTheme.NoActionBar2" ></activity>
+        <activity
+            android:name=".ShowResult"
+            android:theme="@style/AppTheme.NoActionBar2" />
+        <activity android:name=".PdfReader"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".DateSheetActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,4 @@
-package techxpose.co.allresult;
-
-import java.util.ArrayList;
+package techxpose.co.allresult.Model;
 
 /**
  * Created by laddi on 23-February-2018.
@@ -17,7 +15,6 @@ public   Blog(){}
     private String date;
     private String resultdate;
     private String examination;
-    ArrayList<String> list = new ArrayList<>();
 
     public Blog(String branchname, String resultlink, String year, String date, String resultDate, String examination) {
         this.branchname = branchname;
@@ -53,8 +50,6 @@ public   Blog(){}
     }
 
     public String getBranchname() {
-        list.add(branchname+".");
-        System.out.println(list);
         return branchname+".";
     }
 

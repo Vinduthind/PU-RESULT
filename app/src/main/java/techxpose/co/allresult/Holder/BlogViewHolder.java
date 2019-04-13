@@ -1,4 +1,4 @@
-package techxpose.co.allresult.Model;
+package techxpose.co.allresult.Holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -20,4 +20,13 @@
         <item>Additional Subject/s</item>
         <item>Improvement of Performance</item>
     </string-array>
+    <string-array name="dateSheetType">
+        <item>Undergraduate Courses</item>
+        <item>Certificate Courses</item>
+        <item>Diploma / PG Diploma</item>
+        <item>Postgraduate Courses</item>
+        <item>Practicals</item>
+        <item>Professional Courses</item>
+    </string-array>
+
 </resources>

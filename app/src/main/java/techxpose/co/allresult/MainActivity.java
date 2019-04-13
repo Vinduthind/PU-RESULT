@@ -1,6 +1,5 @@
 package techxpose.co.allresult;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.graphics.Color;
@@ -32,12 +31,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import techxpose.co.allresult.Model.BlogViewHolder;
+import techxpose.co.allresult.Model.Blog;
+import techxpose.co.allresult.Holder.BlogViewHolder;
 import techxpose.co.allresult.Adapter.AutoFillTextViewAdapter;
 import techxpose.co.allresult.Model.AutoFillTextViewModel;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView mbloglist;
+    private RecyclerView recyclerView;
     private DatabaseReference mdatabase;
     private Query mQuery;
     private ImageView navigationicon;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mbloglist = findViewById(R.id.blog);
+        recyclerView = findViewById(R.id.blog);
         mytoolbar=findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         mdialog = new ProgressDialog(this);
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         examination = getIntent().getExtras().getString("examination");
         //Toast.makeText(this, examination, Toast.LENGTH_SHORT).show();
         titleText.setText("   "+uidw);
-        mbloglist.setHasFixedSize(true);
-        mbloglist.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mdatabase= FirebaseDatabase.getInstance().getReference().child(uidw);
 
         navigationicon.setOnClickListener(new View.OnClickListener() {
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
             mLinearLayoutManager.setReverseLayout(true);
             mLinearLayoutManager.setStackFromEnd(true);
 
-            mbloglist.setLayoutManager(mLinearLayoutManager);
+         recyclerView.setLayoutManager(mLinearLayoutManager);
             firebaseRecycleAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                 @Override
                 public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
                     mLinearLayoutManager.scrollToPosition(positionStart);
                 }
             });
-            mbloglist.setAdapter(firebaseRecycleAdapter);
+         recyclerView.setAdapter(firebaseRecycleAdapter);
 
     }
 
